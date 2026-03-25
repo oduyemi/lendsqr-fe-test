@@ -1,0 +1,130 @@
+@import "./variables";
+
+body {
+  background: $color-bg;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.layout {
+  display: flex;
+}
+
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background: $color-white;
+  border-right: 1px solid $color-border;
+  padding: 20px 0;
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+
+  &.collapsed {
+    transform: translateX(-100%);
+  }
+
+  .logo {
+    padding: 0 24px 24px;
+
+    img {
+      width: 120px;
+    }
+  }
+
+  .switch-org {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 24px;
+    font-size: 14px;
+    color: $color-text-dark;
+    cursor: pointer;
+
+    svg:last-child {
+      margin-left: auto;
+    }
+
+    &:hover {
+      background: rgba($color-primary, 0.05);
+    }
+  }
+
+  .menu-section {
+    margin-top: 20px;
+
+    .title {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 24px;
+      color: $color-text-light;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .item {
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: $color-text-light;
+      cursor: pointer;
+      position: relative;
+      transition: all $transition-fast;
+
+      svg {
+        opacity: 0.7;
+      }
+
+      &:hover {
+        background: rgba($color-primary, 0.06);
+        color: $color-text-dark;
+
+        svg {
+          opacity: 1;
+        }
+      }
+
+      &.active {
+        background: rgba($color-primary, 0.1);
+        color: $color-text-dark;
+        font-weight: 500;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          width: 3px;
+          background: $color-primary;
+        }
+
+        svg {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+/* Scrollbar (subtle like design) */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .sidebar {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100vh;
+  }
+}
+

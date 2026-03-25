@@ -1,5 +1,6 @@
 import { useAuthStore } from "../store/use-auth";
 import { useNavigate } from "react-router-dom";
+import { Dashboard } from "../components/dashboard/Home";
 
 const DashboardPage = () => {
   const { logout, user } = useAuthStore();
@@ -11,10 +12,7 @@ const DashboardPage = () => {
   };
 
   return (
-    <div>
-      <h1>Welcome {user?.email}</h1>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+      <Dashboard />
   );
 };
 
