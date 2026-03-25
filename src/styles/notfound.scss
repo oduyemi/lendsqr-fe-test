@@ -1,0 +1,39 @@
+@import "./variables";
+
+.notfound {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8fafc, #eef2f7);
+
+  .content {
+    max-width: 500px;
+
+    h1 {
+      font-size: 120px;
+      font-weight: 800;
+      color: $color-primary;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      font-weight: 600;
+      color: $color-text-dark;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: $color-text-light;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .btn-home {
+      @include button-style($color-primary, $color-primary-hover);
+      padding: 12px 20px;
+      font-size: 14px;
+    }
+  }
+}

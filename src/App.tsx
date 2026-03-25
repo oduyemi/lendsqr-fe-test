@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
 import LoginPage from "./pages/Login";
 import DashboardPage from "./pages/Dashboard";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -15,6 +16,10 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardPage />} />
         </Route>
+
+        {/* Catch-all route */}
+        <Route path="*" element={<NotFound />} />
+
     </Routes>
   );
 }
