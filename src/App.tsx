@@ -6,6 +6,8 @@ import LoginPage from "./pages/Login";
 import DashboardPage from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 
+
+
 function App() {
   return (
     <Routes>
@@ -14,7 +16,7 @@ function App() {
 
         {/* Protected */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/admin" element={<DashboardPage />} />
         </Route>
 
         {/* Catch-all route */}

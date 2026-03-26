@@ -1,27 +1,60 @@
 import React from "react";
-import { Menu, Search } from "lucide-react";
+import { Menu, Bell, Search } from "lucide-react";
+import { useAuthStore } from "../../store/use-auth";
+import { useNavigate } from "react-router-dom";
+import "../../styles/header.scss";
+import { LogOut } from "lucide-react";
 
 interface Props {
   toggleSidebar: () => void;
 }
 
-
 export const DashboardHeader: React.FC<Props> = ({ toggleSidebar }) => {
-    return (
-      <div className="header">
-        <div className="d-flex align-items-center gap-3">
-          <Menu onClick={toggleSidebar} style={{ cursor: "pointer" }} />
-  
-          <div className="search input-group">
-            <input className="form-control" placeholder="Search for anything" />
-            <button className="btn"><Search /></button>
-          </div>
-        </div>
-  
-        <div className="d-flex align-items-center gap-3">
-          <span>Docs</span>
-          <img src="https://i.pravatar.cc/40" style={{ borderRadius: "50%" }} />
+  const { logout, user } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
+  return (
+    <div className="header">
+      {/* Left */}
+      <div className="header-left">
+        <Menu className="menu-icon" onClick={toggleSidebar} />
+
+        <div className="search-box">
+          <input type="text" placeholder="Search for anything" />
+          <button className="px-5 py-3">
+            <Search size={16} />
+          </button>
         </div>
       </div>
-    );
-  };
+
+      {/* Right */}
+      <div className="header-right">
+        <span className="docs">Docs</span>
+
+        <Bell className="icon" />
+
+        <div className="profile">
+          <img src="https://i.pravatar.cc/40" alt="avatar" />
+          <span>Adedeji</span>
+
+          {/* Logout */}
+          <button
+            className="logout-btn"
+            onClick={handleLogout}
+            title="Logout"
+          >
+            <LogOut size={18} />
+          </button>
+
+        </div>
+      </div>
+    </div>
+  );
+};
+
+

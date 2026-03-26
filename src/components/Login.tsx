@@ -2,7 +2,7 @@ import { useState, useEffect, FormEvent } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { useAuthStore } from "../store/use-auth";
-import { loginUser } from "../features/users/api/login";
+import { loginUser } from "../features/users/api/login/index";
 import hero from "../assets/images/signinHero.png";
 import logo from "../assets/images/logo/logo.svg";
 import "../styles/login.scss";
@@ -21,14 +21,14 @@ export const LoginForm = () => {
   const [formError, setFormError] = useState<string>("");
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/dashboard");
+      navigate("/admin");
     }
   }, [isAuthenticated, navigate]);
   const mutation = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
       login(data);
-      navigate("/dashboard");
+      navigate("/admin");
     },
     onError: (error: any) => {
       setFormError(error.message);

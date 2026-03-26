@@ -1,5 +1,4 @@
-import React from "react";
-import {
+import React, { useState } from "react";import {
   Home,
   Users,
   UserCheck,
@@ -20,6 +19,8 @@ import {
 import { Link } from "react-router-dom";
 import "../../styles/dashboard.scss";
 import logo from "../../assets/images/logo/logo.svg";
+import { useOrganization } from "../../context/organization.context";
+
 
 interface Props {
   collapsed: boolean;
@@ -32,18 +33,49 @@ const MenuItem = ({ to, icon, label, active }: any) => (
   </Link>
 );
 
+const organizations = ["Lendsqr", "Lendstar", "Irorun", "Paylater"];
+
+
 export const Sidebar: React.FC<Props> = ({ collapsed }) => {
+  const [openOrg, setOpenOrg] = useState(false);
+  const { activeOrg, setActiveOrg } = useOrganization();
+
   return (
     <div className={`sidebar ${collapsed ? "collapsed" : ""}`}>
       <div className="logo">
         <img src={logo} alt="logo" />
       </div>
 
-      <div className="switch-org">
+      <div
+        className="switch-org"
+        onClick={() => setOpenOrg(!openOrg)}
+      >
         <Briefcase size={16} />
-        <span className="label">Switch Organization</span>
-        <ChevronDown size={16} />
+        <span className="label">{activeOrg}</span>
+        <ChevronDown
+          size={16}
+          className={openOrg ? "rotate" : ""}
+        />
       </div>
+
+      {openOrg && (
+        <div className="org-dropdown">
+          {organizations.map((org) => (
+            <div
+              key={org}
+              className={`org-item ${
+                org === activeOrg ? "active" : ""
+              }`}
+              onClick={() => {
+                setActiveOrg(org);
+                setOpenOrg(false);
+              }}
+            >
+              {org}
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="menu-section">
         <MenuItem to="/dashboard" icon={<Home size={16} />} label="Dashboard" />

@@ -1,0 +1,129 @@
+@import "./variables";
+
+body {
+  background: $color-bg;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.layout {
+  display: flex;
+}
+
+.header {
+  height: 80px;
+  background: $color-white;
+  border-bottom: 1px solid $color-border;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .menu-icon {
+      cursor: pointer;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      border: 1px solid $color-border;
+      border-radius: $radius-sm;
+      overflow: hidden;
+      width: 400px;
+
+      input {
+        border: none;
+        outline: none;
+        padding: 10px 12px;
+        flex: 1;
+        font-size: 14px;
+      }
+
+      button {
+        @include button-style($color-primary, $color-primary-hover);
+        padding: 0 16px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .docs {
+      font-size: 14px;
+      color: $color-text-dark;
+      cursor: pointer;
+    }
+
+    .icon {
+      cursor: pointer;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+
+      span {
+        font-size: 14px;
+        color: $color-text-dark;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.logout-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-primary;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: #ff4d4f; 
+    transform: scale(1.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 15px;
+
+    .search-box {
+      display: none;
+    }
+
+    .header-right {
+      gap: 12px;
+
+      .docs {
+        display: none;
+      }
+
+      .profile span {
+        display: none;
+      }
+    }
+  }
+}

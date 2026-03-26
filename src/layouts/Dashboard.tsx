@@ -6,8 +6,10 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ child
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div className="layout">
+    <div className="layout main">
       <Sidebar collapsed={collapsed} />
+
+      
 
       <div className="content">
         <DashboardHeader toggleSidebar={() => setCollapsed(!collapsed)} />
