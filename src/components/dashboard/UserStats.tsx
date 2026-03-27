@@ -16,7 +16,7 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, icon, variant }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/users?filter=${title.toLowerCase().replace(/ /g, "_")}`);
+    navigate(`/admin/users?filter=${title.toLowerCase().replace(/ /g, "_")}`);
   };
 
   return (

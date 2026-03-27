@@ -143,29 +143,33 @@
       border-bottom: 1px solid rgba(33, 63, 125, 0.06);
 
       h6 {
-        margin-bottom: 15px;
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px 30px;
+        margin-bottom: 12px;
+        font-size: 13px;
+        font-weight: 600;
+        color: $color-text-dark;
       }
     }
 
+    /* Info block improvements */
     .info {
       display: flex;
       flex-direction: column;
+      gap: 4px;
 
       .label {
         font-size: 11px;
         color: $color-text-light;
         text-transform: uppercase;
+        letter-spacing: 0.04em;
       }
 
       .value {
         font-size: 14px;
         font-weight: 500;
+        color: $color-text-dark;
+
+        /* Prevent overflow issues */
+        word-break: break-word;
       }
     }
   }
@@ -182,24 +186,208 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* RESPONSIVE */
-@media (max-width: 992px) {
-  .profile-card {
-    flex-direction: column;
-    align-items: flex-start;
+/* Better spacing + structure */
+.section {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(33, 63, 125, 0.06);
+
+  h6 {
+    margin-bottom: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: $color-text-dark;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .label {
+    font-size: 11px;
+    color: $color-text-light;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
-  .details-card .grid {
-    grid-template-columns: repeat(2, 1fr);
+  .value {
+    font-size: 14px;
+    font-weight: 500;
+    color: $color-text-dark;
+
+    word-break: break-word;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px 30px;
+  }
+}
+
+@media (max-width: 992px) {
+  .user-details-page {
+    .profile-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+
+      .divider {
+        display: none;
+      }
+    }
+
+    .details-card .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 }
 
 @media (max-width: 576px) {
-  .details-card .grid {
-    grid-template-columns: 1fr;
-  }
+  .user-details-page {
+    .top-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
 
-  .tabs {
-    overflow-x: auto;
+      .actions {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+
+        button {
+          flex: 1;
+          padding: 10px;
+          font-size: 12px;
+        }
+      }
+    }
+
+    .page-title {
+      font-size: 18px;
+      margin: 15px 0;
+    }
+
+    .profile-card {
+      padding: 16px;
+      gap: 16px;
+
+      .left {
+        width: 100%;
+
+        .avatar {
+          width: 50px;
+          height: 50px;
+          font-size: 18px;
+        }
+
+        h5 {
+          font-size: 16px;
+        }
+
+        span {
+          font-size: 12px;
+        }
+      }
+
+      .tier,
+      .balance {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .balance h5 {
+        font-size: 16px;
+      }
+
+      .balance span {
+        font-size: 12px;
+      }
+    }
+
+    .tabs {
+      overflow-x: auto;
+      gap: 12px;
+      padding-bottom: 6px;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .tab {
+        white-space: nowrap;
+        padding: 8px 14px;
+        background: #f9fafb;
+        border-radius: 20px;
+        font-size: 12px;
+
+        &.active {
+          background: rgba($color-primary, 0.1);
+
+          &::after {
+            display: none; 
+          }
+        }
+      }
+    }
+
+    .details-card {
+      padding: 16px;
+
+      .section {
+        margin-bottom: 15px;
+
+        h6 {
+          font-size: 13px;
+        }
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .info {
+        .label {
+          font-size: 10px;
+        }
+
+        .value {
+          font-size: 13px;
+        }
+      }
+    }
+
+    .section {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+  
+      h6 {
+        font-size: 12px;
+      }
+    }
+  
+    .info {
+      padding: 10px 12px;
+      background: #f9fafb;
+      border-radius: 8px;
+  
+      .value {
+        font-size: 13px;
+      }
+    }
+  
+    .grid {
+      gap: 10px;
+    }
+  
+    .empty-state {
+      padding: 20px;
+      font-size: 13px;
+    }
   }
 }

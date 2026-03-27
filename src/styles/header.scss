@@ -108,22 +108,67 @@ body {
 
 @media (max-width: 768px) {
   .header {
-    padding: 0 15px;
+    height: 64px;
+    padding: 0 12px;
+  }
+
+  .header-left {
+    gap: 12px;
+
+    .menu-icon {
+      font-size: 22px;
+    }
 
     .search-box {
+      width: 150px !important;
+      transition: all 0.3s ease;
+  
+      input {
+        display: none;
+      }
+  
+      &.active {
+        width: 200px;
+  
+        input {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .header-right {
+    gap: 10px;
+
+    .docs {
       display: none;
     }
 
-    .header-right {
-      gap: 12px;
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
 
-      .docs {
-        display: none;
+    .profile {
+      gap: 6px;
+
+      img {
+        width: 32px;
+        height: 32px;
       }
 
-      .profile span {
-        display: none;
+      span {
+        display: none; 
       }
+    }
+  }
+
+  .logout-btn {
+    margin-left: 6px;
+
+    svg {
+      width: 18px;
+      height: 18px;
     }
   }
 }

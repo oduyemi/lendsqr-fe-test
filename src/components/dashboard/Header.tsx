@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Menu, Bell, Search } from "lucide-react";
 import { useAuthStore } from "../../store/use-auth";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ interface Props {
 export const DashboardHeader: React.FC<Props> = ({ toggleSidebar }) => {
   const { logout } = useAuthStore();
   const navigate = useNavigate();
+  const [showSearch, setShowSearch] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -24,9 +25,9 @@ export const DashboardHeader: React.FC<Props> = ({ toggleSidebar }) => {
       <div className="header-left">
         <Menu className="menu-icon" onClick={toggleSidebar} />
 
-        <div className="search-box">
+        <div className={`search-box ${showSearch ? "active" : ""}`}>
           <input type="text" placeholder="Search for anything" />
-          <button className="px-5 py-3">
+          <button onClick={() => setShowSearch((prev) => !prev)}>
             <Search size={16} />
           </button>
         </div>

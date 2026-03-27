@@ -18,13 +18,16 @@ export const LoginForm = () => {
     login,
     isAuthenticated,
   } = useAuthStore();
+
   const [showPassword, setShowPassword] = useState(false);
   const [formError, setFormError] = useState<string>("");
+
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/admin");
     }
   }, [isAuthenticated, navigate]);
+
   const mutation = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
@@ -32,9 +35,10 @@ export const LoginForm = () => {
       navigate("/admin");
     },
     onError: (error: any) => {
-      setFormError(error.message);
+      setFormError(error.message || "Login failed");
     },
   });
+
   const validateForm = () => {
     if (!email) return "Email is required";
     if (!/\S+@\S+\.\S+/.test(email)) return "Enter a valid email";
@@ -44,8 +48,10 @@ export const LoginForm = () => {
 
     return "";
   };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const error = validateForm();
     if (error) {
       setFormError(error);
@@ -59,7 +65,7 @@ export const LoginForm = () => {
   return (
     <div className="login-container container-fluid">
       <div className="row min-vh-100">
-        {/* LEFT */}
+        {/* LEFT PANEL */}
         <div className="col-lg-6 d-none d-lg-flex flex-column justify-content-between left-panel">
           <div className="logo">
             <img src={logo} alt="logo" />
@@ -70,7 +76,6 @@ export const LoginForm = () => {
           </div>
         </div>
 
-        {/* RIGHT */}
         <div className="col-lg-6 d-flex align-items-center justify-content-center right-panel">
           <div className="login-box">
             <h1>Welcome!</h1>
@@ -83,21 +88,29 @@ export const LoginForm = () => {
                   placeholder="Email"
                   className="form-control"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  autoFocus
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setFormError("");
+                  }}
                 />
               </div>
 
-              <div className="form-group position-relative">
+              <div className="form-group">
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   className="form-control"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setFormError("");
+                  }}
                 />
+
                 <span
                   className="toggle-password"
-                  onClick={() => setShowPassword(!showPassword)}
+                  onClick={() => setShowPassword((prev) => !prev)}
                 >
                   {showPassword ? "HIDE" : "SHOW"}
                 </span>
@@ -110,11 +123,12 @@ export const LoginForm = () => {
               <button
                 type="submit"
                 className="btn login-btn"
-                disabled={mutation.isPending}
+                disabled={mutation.isPending || !email || !password}
               >
-                {mutation.isPending ? "Logging in..." : "LOG IN"}
+                {mutation.isPending ? <span className="spinner" /> : "LOG IN"}
               </button>
             </form>
+
             {formError && <p className="error">{formError}</p>}
             {mutation.isSuccess && (
               <p className="success">Login successful</p>
