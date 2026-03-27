@@ -1,5 +1,5 @@
-// eslint-disable
 import "@testing-library/jest-dom";
+// eslint-disable-next-line
 import { TextEncoder, TextDecoder } from "util";
 
 Object.assign(globalThis, {
