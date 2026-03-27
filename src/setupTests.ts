@@ -1,13 +1,12 @@
 import "@testing-library/jest-dom";
 import { TextEncoder, TextDecoder } from "util";
 
-Object.assign(global, {
+Object.assign(globalThis, {
   TextEncoder,
   TextDecoder,
 });
 
-// Mock fetch
-global.fetch = jest.fn();
+globalThis.fetch = jest.fn();
 
 // Mock localStorage
 class LocalStorageMock {
@@ -35,7 +34,6 @@ Object.defineProperty(window, "localStorage", {
   writable: true,
 });
 
-// Reset before each test
 beforeEach(() => {
   window.localStorage.clear();
   jest.clearAllMocks();
