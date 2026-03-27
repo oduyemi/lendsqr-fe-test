@@ -1,10 +1,24 @@
 import "@testing-library/jest-dom";
-// eslint-disable-next-line
-import { TextEncoder, TextDecoder } from "util";
+
+
+class MockTextEncoder {
+  encode(input: string): Uint8Array {
+    return new Uint8Array([...input].map((c) => c.charCodeAt(0)));
+  }
+}
+
+class MockTextDecoder {
+  decode(input: Uint8Array): string {
+    return Array.from(input)
+      .map((b) => String.fromCharCode(b))
+      .join("");
+  }
+}
+
 
 Object.assign(globalThis, {
-  TextEncoder,
-  TextDecoder,
+  TextEncoder: MockTextEncoder,
+  TextDecoder: MockTextDecoder,
 });
 
 globalThis.fetch = jest.fn();
